@@ -11,6 +11,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Home from './HomeComponent';
 import Contacto from './ContactoComponent';
 import QuienesSomos from './QuienesSomosComponent';
+import { colorGaztaroaClaro } from '../comun/comun';
+import { colorGaztaroaOscuro } from '../comun/comun';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -43,7 +45,7 @@ function CalendarioNavegador() {
       headerMode="screen"
       screenOptions={{
         headerTintColor: '#fff',
-        headerStyle: { backgroundColor: '#015afc' },
+        headerStyle: { backgroundColor: colorGaztaroaOscuro },
         headerTitleStyle: { color: '#fff' },
       }}
     >
@@ -72,7 +74,7 @@ function HomeNavegador() {
       headerMode="screen"
       screenOptions={{
         headerTintColor: '#fff',
-        headerStyle: { backgroundColor: '#015afc' },
+        headerStyle: { backgroundColor: colorGaztaroaOscuro },
         headerTitleStyle: { color: '#fff' },
       }}
     >
@@ -94,7 +96,7 @@ function ContactoNavegador() {
       headerMode="screen"
       screenOptions={{
         headerTintColor: '#fff',
-        headerStyle: { backgroundColor: '#015afc' },
+        headerStyle: { backgroundColor: colorGaztaroaOscuro },
         headerTitleStyle: { color: '#fff' },
       }}
     >
@@ -116,7 +118,7 @@ function QuienesSomosNavegador({ navigation }) {
       headerMode="screen"
       screenOptions={{
         headerTintColor: '#fff',
-        headerStyle: { backgroundColor: '#015afc' },
+        headerStyle: { backgroundColor: colorGaztaroaOscuro },
         headerTitleStyle: { color: '#fff' },
         headerLeft: () => (<Icon name="menu" size={28} color='white' onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} />),
       }}
@@ -136,7 +138,7 @@ function DrawerNavegador() {
   return (
     <Drawer.Navigator
       drawerStyle={{
-        backgroundColor: '#c2d3da',
+        backgroundColor: colorGaztaroaClaro,
       }}
       initialRouteName="Home"
       drawerContent={props => <CustomDrawerContent {...props} />}
@@ -210,7 +212,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   drawerHeader: {
-    backgroundColor: '#015afc',
+    backgroundColor: colorGaztaroaOscuro,
     height: 100,
     alignItems: 'center',
     justifyContent: 'center',

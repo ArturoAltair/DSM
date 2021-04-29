@@ -3,6 +3,7 @@ import { Text, View, ScrollView, FlatList } from 'react-native';
 import { COMENTARIOS } from '../comun/comentarios';
 import { Card, Icon } from 'react-native-elements';
 import { EXCURSIONES } from '../comun/excursiones';
+import { baseUrl } from '../comun/comun';
 
 function RenderComentario(props) {
   const comentarios = props.comentarios;
@@ -40,7 +41,7 @@ function RenderExcursion(props) {
       <Card>
         <Card.Title>{excursion.nombre}</Card.Title>
         <Card.Divider />
-        <Card.Image source={require('./imagenes/40Años.png')}></Card.Image>
+        <Card.Image source={{uri: baseUrl + excursion.imagen}}></Card.Image>
         <Text style={{ margin: 20 }}>
           {excursion.descripcion}
         </Text>
@@ -72,8 +73,7 @@ class DetalleExcursion extends Component {
 
   marcarFavorito(excursionId) {
     this.setState({
-      favoritos: this.state.favoritos.concat(excursionId
-      )
+      favoritos: this.state.favoritos.concat(excursionId)
     });
   }
 
