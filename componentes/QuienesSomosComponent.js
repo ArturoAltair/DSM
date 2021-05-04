@@ -3,9 +3,16 @@ import { Text, View } from 'react-native';
 import { Card } from 'react-native-elements';
 import { ListItem, Avatar } from 'react-native-elements';
 import { SafeAreaView, FlatList } from 'react-native';
-import { ACTIVIDADES } from '../comun/actividades';
+// import { ACTIVIDADES } from '../comun/actividades';
 import { ScrollView } from 'react-native-gesture-handler';
 import { baseUrl } from '../comun/comun';
+import { connect } from 'react-redux';
+
+const mapStateToProps = state => {
+    return {
+        actividades: state.actividades
+    }
+}
 
 function Historia() {
 
@@ -33,12 +40,12 @@ function Historia() {
 }
 
 class QuienesSomos extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            actividades: ACTIVIDADES
-        };
-    }
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         actividades: ACTIVIDADES
+    //     };
+    // }
 
     render() {
 
@@ -50,7 +57,7 @@ class QuienesSomos extends Component {
                     <ListItem
                         key={index}
                         bottomDivider>
-                        <Avatar source={{uri: baseUrl + item.imagen}} />
+                        <Avatar source={{ uri: baseUrl + item.imagen }} />
                         <ListItem.Content>
                             <ListItem.Title>{item.nombre}</ListItem.Title>
                             <ListItem.Subtitle>{item.descripcion}</ListItem.Subtitle>
@@ -65,7 +72,8 @@ class QuienesSomos extends Component {
                 <SafeAreaView>
                     <Historia />
                     <FlatList
-                        data={this.state.actividades}
+                        // data={this.state.actividades}
+                        data={this.props.actividades.actividades}
                         renderItem={renderActividadItem}
                         keyExtractor={item => item.id.toString()}
                     />
@@ -76,4 +84,4 @@ class QuienesSomos extends Component {
     }
 }
 
-export default QuienesSomos;
+export default connect(mapStateToProps)(QuienesSomos);

@@ -13,6 +13,24 @@ import Contacto from './ContactoComponent';
 import QuienesSomos from './QuienesSomosComponent';
 import { colorGaztaroaClaro } from '../comun/comun';
 import { colorGaztaroaOscuro } from '../comun/comun';
+import { connect } from 'react-redux';
+import { fetchExcursiones, fetchComentarios, fetchCabeceras, fetchActividades } from '../redux/ActionCreators';
+
+const mapStateToProps = state => {
+  return {
+    excursiones: state.excursiones,
+    comentarios: state.comentarios,
+    cabeceras: state.cabeceras,
+    actividades: state.actividades
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  fetchExcursiones: () => dispatch(fetchExcursiones()),
+  fetchComentarios: () => dispatch(fetchComentarios()),
+  fetchCabeceras: () => dispatch(fetchCabeceras()),
+  fetchActividades: () => dispatch(fetchActividades()),
+})
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -67,7 +85,7 @@ function CalendarioNavegador() {
   );
 }
 
-function HomeNavegador() {
+function HomeNavegador({ navigation }) {
   return (
     <Stack.Navigator
       initialRouteName="Home"
@@ -76,6 +94,7 @@ function HomeNavegador() {
         headerTintColor: '#fff',
         headerStyle: { backgroundColor: colorGaztaroaOscuro },
         headerTitleStyle: { color: '#fff' },
+        headerLeft: () => (<Icon name="menu" size={28} color='white' onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} />),
       }}
     >
       <Stack.Screen
@@ -89,7 +108,7 @@ function HomeNavegador() {
   );
 }
 
-function ContactoNavegador() {
+function ContactoNavegador({ navigation }) {
   return (
     <Stack.Navigator
       initialRouteName="Contacto"
@@ -98,6 +117,7 @@ function ContactoNavegador() {
         headerTintColor: '#fff',
         headerStyle: { backgroundColor: colorGaztaroaOscuro },
         headerTitleStyle: { color: '#fff' },
+        headerLeft: () => (<Icon name="menu" size={28} color='white' onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} />),
       }}
     >
       <Stack.Screen
@@ -192,8 +212,14 @@ function DrawerNavegador() {
   );
 }
 
-
 class Campobase extends Component {
+  
+  componentDidMount() {
+    this.props.fetchExcursiones();
+    this.props.fetchComentarios();
+    this.props.fetchCabeceras();
+    this.props.fetchActividades();
+  }
 
   render() {
 
@@ -231,4 +257,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Campobase;
+export default connect(mapStateToProps, mapDispatchToProps)(Campobase);
