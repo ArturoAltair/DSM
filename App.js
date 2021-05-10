@@ -11,7 +11,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <View style={styles.container}>
-        <Campobase />
+        <Campobase/>
         <StatusBar style="auto" />
       </View>
     </Provider>
